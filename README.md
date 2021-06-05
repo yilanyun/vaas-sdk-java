@@ -1,2 +1,2 @@
 # vaas-sdk-java
-VaaS API Java SDK 1.0
+VaaS API Java SDK
