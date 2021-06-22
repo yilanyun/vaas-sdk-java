@@ -1,9 +1,9 @@
-package ylyun.api.entity;
+package com.vaas.api.entity;
 
 import java.io.Serializable;
 
 public class Channel implements Serializable {
-	
+
     private String id;
     private String name;
 
@@ -23,9 +23,8 @@ public class Channel implements Serializable {
         this.name = name;
     }
 
-    @Override
     public String toString() {
-        return "Channel{" +
+        return "{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';

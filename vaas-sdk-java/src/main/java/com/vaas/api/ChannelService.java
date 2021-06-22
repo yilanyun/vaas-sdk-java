@@ -1,49 +1,50 @@
-package ylyun.api;
+package com.vaas.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.vaas.api.entity.ResponseEntity;
+import com.vaas.api.entity.Channel;
+import com.vaas.common.connection.OkHttpClient;
+import com.vaas.common.utils.Aes;
+import com.vaas.common.utils.ConfigMap;
+import com.vaas.common.utils.GenerateSign;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.google.gson.Gson;
-import ylyun.api.entity.Channel;
-import ylyun.api.entity.ChannelList;
-import ylyun.common.connection.ApacheHttpClient;
 
 /**
  * 视频频道服务
  */
 public class ChannelService {
-	
-	private static Map<String, String> servUri = new HashMap<String, String>();
-	private YLYunClient client;
-	private Map<String, String> comm = new HashMap<String, String>();
-	private static Logger LOG = LoggerFactory.getLogger(ChannelService.class);
-	private static Gson GSON = new Gson();
-	
-	public ChannelService(YLYunClient client) {
-		servUri.put("channel", "/video/getchannel");
-		this.client = client;
-		this.comm = this.client.getCommParams();
-	}
-	
-	/**
-	 * 获取频道
-	 */
-	public List<Channel> getChannel() {
-		List<Channel> data = new ArrayList<Channel>();
-		Map<String, String> params = new HashMap<String, String>();
-		params.putAll(this.comm);
-		String servUrl = this.client.getFullUrl(servUri.get("channel"), params);
-		//发送请求
-		String ret = ApacheHttpClient.httpGet(servUrl);
-		ChannelList list = GSON.fromJson(ret, ChannelList.class);
-		if (list.isOk() && !list.getData().isEmpty()) {
-			data = list.getData();
-		} else {
-			LOG.warn("get channel fail");
-		}
-		return data;
-	}
+
+    private final JSONObject params;
+    private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
+    private static final Gson GSON = new Gson();
+    private static final String SERV_CHANNEL = "/video/channels";
+
+    public ChannelService(JSONObject params) {
+        this.params = params;
+    }
+
+    /**
+     * 获取渠道的频道列表
+     *
+     * @return List 频道对象集合
+     */
+    public List<Channel> getChannel() {
+        List<Channel> data = new ArrayList<>();
+        String serverUrl = ConfigMap.getValue("HOST") + SERV_CHANNEL;
+        JSONObject params = this.params;
+        String postData = GenerateSign.getPostBodyData(params);
+        String ret = OkHttpClient.httpPost(serverUrl, postData);
+        ResponseEntity res = GSON.fromJson(ret, ResponseEntity.class);
+        if (res.isOk() && !res.getData().isEmpty()) {
+            Channel[] cl = GSON.fromJson(Aes.decrypt(res.getData()), Channel[].class);
+            data = Arrays.asList(cl);
+        } else {
+            LOG.warn("get channel fail: " + res.getMsg());
+        }
+        return data;
+    }
 }

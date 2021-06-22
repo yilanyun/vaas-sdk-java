@@ -1,9 +1,10 @@
-package ylyun.api.entity;
+package com.vaas.api.entity;
 
-public class BaseEntity {
+public class ResponseEntity {
 	
     protected String code;
     protected String msg;
+    protected String data;
     protected String log_id;
 
     public String getCode() {
@@ -20,6 +21,14 @@ public class BaseEntity {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getLog_id() {

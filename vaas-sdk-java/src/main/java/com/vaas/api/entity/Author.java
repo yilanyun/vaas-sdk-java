@@ -1,8 +1,9 @@
-package ylyun.api.entity;
+package com.vaas.api.entity;
 
 import java.io.Serializable;
 
-public class Provider implements Serializable {
+public class Author implements Serializable {
+
     private String id;
     private String name;
     private String avatar;
@@ -29,5 +30,13 @@ public class Provider implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String toString() {
+        return "{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", avatar='" + avatar + '\'' +
+                '}';
     }
 }

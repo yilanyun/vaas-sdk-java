@@ -1,21 +1,13 @@
-package ylyun.api.entity;
+package com.vaas.api.entity;
 
 import java.io.Serializable;
 
 public class Play implements Serializable {
-    private String name;
+
     private String uri;
     private long size;
     private String code;
-    private String watermark;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     public String getUri() {
         return uri;
@@ -41,22 +33,20 @@ public class Play implements Serializable {
         this.code = code;
     }
 
-    public String getWatermark() {
-        return watermark;
+    public String getName() {
+        return name;
     }
 
-    public void setWatermark(String watermark) {
-        this.watermark = watermark;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
     public String toString() {
-        return "Play{" +
-                "name='" + name + '\'' +
-                ", uri='" + uri + '\'' +
+        return "{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
                 ", size=" + size +
-                ", code='" + code + '\'' +
-                ", watermark='" + watermark + '\'' +
+                ", uri='" + uri + '\'' +
                 '}';
     }
 }
