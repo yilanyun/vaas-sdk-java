@@ -2,7 +2,9 @@
 
 ## 概述
 
-这是 VaaS 视频云 REST API 的 Java 版本封装开发包，是由一览云官方提供的，一般支持最新的 API 功能。
+这是 VaaS API 的 Java 版本封装开发包，是由一览云官方提供的，一般支持最新的 API 功能。
+
+对应的 REST API 文档：<http://doc.yilan.tv/feedv2/server/api/video_flow>
 
 ## 安装
 
@@ -30,20 +32,44 @@
 ```
 ### jar 包方式
 
-请到 [Release页面](https://github.com/yilanyun/vaas-sdk-java/releases)下载最新版本的发布包。
+请到 [Release页面](https://github.com/yilanyun/vaas-sdk-java/releases) 下载最新版本的发布包。
 
-### 导入本项目
+### 导入源码项目
 
 * 可以采用 `git clone https://github.com/yilanyun/vaas-sdk-java.git` 命令下载源码
-* 如果不使用git，请到[github](https://github.com/yilanyun/vaas-sdk-java.git)下载源码包并解压
+* 如果不使用git，请到 [github](https://github.com/yilanyun/vaas-sdk-java.git) 下载源码包并解压
 * 采用eclipse导入下载的源码工程，推荐采用maven的方式，方便依赖包的管理
 * 开发者需要注意，将本项目的编码格式设置为UTF-8
+* 可以用 Eclipse 类 IDE 导出 jar 包。建议直接使用 maven，执行命令：
 
-### 构建本项目
 
-可以用 Eclipse 类 IDE 导出 jar 包。建议直接使用 maven，执行命令：
+    mvn clean package
+    
+## 关于ACCESS_KEY / ACCESS_TOKEN
 
-    mvn package
+### ACCESS_KEY / ACCESS_TOKEN 注册申请流程
+
+1.使用帐号/密码 [登录](https://yuncms.yilan.tv/admin/default/login) 控制台；
+
+2.选择一级菜单“应用管理”->选择二级菜单“应用列表”,点击“新建应用”按钮创建应用；
+
+3.创建过程中，请正确填写应用包名。 对于SDK，建议在“详情页地址”处填写正确的应用下载地址，以便之后进行广告配置以及运营工作。若应用暂未上架，此处可以先填写公司网址。待应用上架后请及时更新；
+
+4.创建完成后，等待应用审核。一览将在3个工作日内审核完成。应用创建后分配access key和access token。
+
+### ACCESS_KEY/ACCESS_TOKEN在sdk中的使用
+
+- (option 1 推荐) 在代码里显示调用方法 setAccessKey / setAccessToken，例：
+```
+  client.setAccessKey("your access_key");
+  client.setAccessToken("your access_token");
+```
+
+- (option 2) 放在配置文件 vaas-sdk-java/src/mian/resources/application.properties，格式为：
+```
+  ACCESS_KEY = "your access_key"
+  ACCESS_TOKEN = "your access_token"
+```
 
 ## 使用样例
 
@@ -69,116 +95,7 @@ import com.vaas.api.VaaSClient;
     client.setAccessToken("your access_token");
 ...
 ```
-#### 公共参数说明
-| 参数名称 | 类型 | 是否必传 | 解释 |
-| --- | --- | --- | --- |
-| udid | string | 是 | 设备唯一标识 |
-| platform | int | 是 | 1-Android，2-iOS，3-H5，4-小程序，5-web |
-| pkg_name | string | 是 | 应用包名(与申请应用时包名一致，长度5到64位) |
-
-### 频道相关服务
-```
-    ChannelService cs = client.channel();
-    List<Channel> data = cs.getChannel();
-    System.out.println("channel data: ");
-    for (Channel ch: data) {
-        System.out.println(ch.toString());
-    }
-```
-
-### 推荐信息流服务
-```
-    RecommendService rs = client.recommendService();
-    List<Video> data = rs.feed(1, 10169, 0, 6);
-    System.out.println("video feed list: ");
-    for (Video v: data) {
-        System.out.println(v.toString());
-    }
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| video_type | int |  无 | 是 | 视频类型，1-横屏，2-竖屏 |
-| channelId | int |  无 | 否 | 频道ID |
-| load_type | int | 0 | 否 | 加载方式 0-上拉加载更多 1-非首次下拉刷新时 2-首次刷新某个频道 |
-| size | int | 8 | 否 | 返回条数（1～8） |
-
-### 推荐相关服务
-```
-    RecommendService rs = client.recommendService();
-    List<Video> data = rs.relation("JMewZ4zoXO5K", 8);
-    System.out.println("video relation list: ");
-    for (Video v: data) {
-        System.out.println(v.toString());
-    }
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| id | string |  无 | 是 | 视频ID |
-| size | int | 20 | 否 | 返回条数（1～8） |
-
-### 视频详情服务
-```
-    VideoService vs = client.video();
-    List<Video> data = vs.details("JMewZ4zoXO5K,njz3DnwDD45V", 1);
-    System.out.println("video details: ");
-    for (Video v: data) {
-        System.out.println(v.toString());
-    }
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| ids | string | 无 | 是 | 视频ID，多个用英文逗号隔开 |
-| video_type | int |  无 | 是 | 视频类型，1-横屏，2-竖屏 |
-
-### 视频播放信息服务
-```
-    VideoService vs = client.video();
-    List<Play> data = vs.play("JMewZ4zoXO5K");
-    System.out.println("video play data: ");
-    for (Play pl: data) {
-        System.out.println(pl.toString());
-    }
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| id | string | 无 | 是 | 视频ID |
-
-### 作者详情服务
-```
-    CpService cs = client.cp();
-    Cp info = cs.cpInfo("DVjdRzOxny8d", 1);
-    System.out.println("cp data: " + info.toString());
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| id | string | 无 | 是 | 作者ID |
-| video_type | int |  无 | 是 | 视频类型，1-横屏，2-竖屏 |
-
-### 作者视频列表服务
-```
-    CpService cs = client.cp();
-    List<Video> data = cs.cpVideoList("d4jrXOJm0OyG", 1, 1, 10);
-    System.out.println("cp video list: ");
-    for (Video v: data) {
-        System.out.println(v.toString());
-    }
-```
-#### 参数说明
-| 参数名称 | 类型 | 默认值 | 是否必传 | 解释 |
-| --- | --- | --- | --- | --- |
-| id | string | 无 | 是 | 作者ID |
-| video_type | int |  无 | 是 | 视频类型，1-横屏，2-竖屏 |
-| page | int | 1 | 否 | 页数 |
-| size | int | 20 | 否 | 返回条数 |
 
 ## Examples
 
 测试样例 com.vaas.example.channel.GetChannelDemo
-
-## License
-MIT
