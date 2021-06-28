@@ -2,7 +2,7 @@ package com.vaas.api.entity;
 
 import java.io.Serializable;
 
-public class CommonEntity implements Serializable {
+public class CommonParams implements Serializable {
 
     private String udid;
     private int platform;

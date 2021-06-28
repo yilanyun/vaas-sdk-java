@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.vaas.api.ChannelService;
 import com.vaas.api.entity.Channel;
-import com.vaas.api.entity.CommonEntity;
+import com.vaas.api.entity.CommonParams;
 import com.vaas.api.VaaSClient;
 
 public class GetChannelDemo {
 
     public static void main(String[] args) {
-        CommonEntity comm = new CommonEntity();
+        CommonParams comm = new CommonParams();
         comm.setUdid("df757f33b10f142596106bb451fa2187");
         comm.setPlatform(5);
         comm.setPkg_name("vaas-demo");

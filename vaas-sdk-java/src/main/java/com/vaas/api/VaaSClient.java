@@ -1,7 +1,9 @@
 package com.vaas.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.vaas.api.entity.CommonEntity;
+import com.vaas.api.entity.CommonParams;
+import com.vaas.api.entity.ReportParams;
 import com.vaas.common.utils.ConfigMap;
 
 /**
@@ -9,12 +11,16 @@ import com.vaas.common.utils.ConfigMap;
  */
 public class VaaSClient {
 
-    private final JSONObject commParams = new JSONObject();
+    private JSONObject commParams = new JSONObject();
 
-    public VaaSClient(CommonEntity comm) {
+    public VaaSClient(CommonParams comm) {
         this.commParams.put("udid", comm.getUdid());
         this.commParams.put("platform", comm.getPlatform());
         this.commParams.put("pkg_name", comm.getPkg_name());
+    }
+
+    public VaaSClient(ReportParams p) {
+        this.commParams = (JSONObject) JSON.toJSON(p);
     }
 
     public ChannelService channel() {
@@ -31,6 +37,11 @@ public class VaaSClient {
 
     public CpService cp() {
         return new CpService(this.commParams);
+    }
+
+    public ReportService report() {
+        this.commParams.put("access_key", ConfigMap.getValue("ACCESS_KEY"));
+        return new ReportService(this.commParams);
     }
 
     public void setAccessKey(String accessKey) {

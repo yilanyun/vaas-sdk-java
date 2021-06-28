@@ -2,7 +2,7 @@ package com.vaas.example.recommend;
 
 import java.util.List;
 
-import com.vaas.api.entity.CommonEntity;
+import com.vaas.api.entity.CommonParams;
 import com.vaas.api.entity.Video;
 import com.vaas.api.RecommendService;
 import com.vaas.api.VaaSClient;
@@ -10,7 +10,7 @@ import com.vaas.api.VaaSClient;
 public class RelationDemo {
 
     public static void main(String[] args) {
-        CommonEntity comm = new CommonEntity();
+        CommonParams comm = new CommonParams();
         comm.setUdid("df757f33b10f142596106bb451fa2187");
         comm.setPlatform(5);
         comm.setPkg_name("vaas-demo");
