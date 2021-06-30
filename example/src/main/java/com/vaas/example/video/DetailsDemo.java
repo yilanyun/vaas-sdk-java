@@ -13,7 +13,7 @@ public class DetailsDemo {
         CommonParams comm = new CommonParams();
         comm.setUdid("df757f33b10f142596106bb451fa2187");
         comm.setPlatform(5);
-        comm.setPkg_name("vaas-demo");
+        comm.setPkg_name("tv.yilan.qianpai.app");
         VaaSClient client = new VaaSClient(comm);
         // call below method if you dont set access_key and access_token in vaas-sdk-java/src/main/resources/application.properties
 //        client.setAccessKey("your access_key");
