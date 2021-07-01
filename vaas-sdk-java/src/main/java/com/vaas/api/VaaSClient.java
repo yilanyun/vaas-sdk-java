@@ -2,7 +2,6 @@ package com.vaas.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.vaas.api.entity.CommonParams;
 import com.vaas.api.entity.ReportParams;
 import com.vaas.common.utils.ConfigMap;
 
@@ -13,10 +12,10 @@ public class VaaSClient {
 
     private JSONObject commParams = new JSONObject();
 
-    public VaaSClient(CommonParams comm) {
-        this.commParams.put("udid", comm.getUdid());
-        this.commParams.put("platform", comm.getPlatform());
-        this.commParams.put("pkg_name", comm.getPkg_name());
+    public VaaSClient(String udid, int platform, String pkgName) {
+        this.commParams.put("udid", udid);
+        this.commParams.put("platform", platform);
+        this.commParams.put("pkg_name", pkgName);
     }
 
     public VaaSClient(ReportParams p) {
