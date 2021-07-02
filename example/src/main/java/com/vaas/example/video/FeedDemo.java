@@ -1,4 +1,4 @@
-package com.vaas.example.recommend;
+package com.vaas.example.video;
 
 import java.util.List;
 
