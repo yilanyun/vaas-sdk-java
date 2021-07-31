@@ -12,8 +12,7 @@ public class VaaSClient {
 
     private JSONObject commParams = new JSONObject();
 
-    public VaaSClient(String udid, int platform, String pkgName) {
-        this.commParams.put("udid", udid);
+    public VaaSClient(int platform, String pkgName) {
         this.commParams.put("platform", platform);
         this.commParams.put("pkg_name", pkgName);
     }
@@ -41,6 +40,10 @@ public class VaaSClient {
     public ReportService report() {
         this.commParams.put("access_key", ConfigMap.getValue("ACCESS_KEY"));
         return new ReportService(this.commParams);
+    }
+
+    public void setUdid(String udid) {
+        this.commParams.put("udid", udid);
     }
 
     public void setAccessKey(String accessKey) {
