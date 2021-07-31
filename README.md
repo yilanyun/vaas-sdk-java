@@ -99,3 +99,4 @@ import com.vaas.api.VaaSClient;
 ## Examples
 
 测试样例 com.vaas.example.channel.GetChannelDemo
+
