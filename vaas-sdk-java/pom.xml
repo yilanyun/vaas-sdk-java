@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vaas</groupId>
-    <version>1.0.9</version>
+    <version>1.0.8</version>
     <artifactId>vaas-sdk-java</artifactId>
 
     <name>vaas-sdk-java</name>
@@ -27,8 +27,8 @@
 
     <developers>
         <developer>
-            <id>VaaSProducts</id>
-            <name>VaaS SDK</name>
+            <id>vaasproducts</id>
+            <name>VAAS SDK</name>
         </developer>
     </developers>
 

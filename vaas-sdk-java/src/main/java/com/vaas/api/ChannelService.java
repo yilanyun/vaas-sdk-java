@@ -37,7 +37,6 @@ public class ChannelService {
         String serverUrl = ConfigMap.getValue("HOST") + SERV_CHANNEL;
         JSONObject params = this.params;
         String postData = GenerateSign.getPostBodyData(params);
-        System.out.println(postData);
         String ret = OkHttpClient.httpPost(serverUrl, postData);
         ResponseEntity res = GSON.fromJson(ret, ResponseEntity.class);
         if (res.isOk() && !res.getData().isEmpty()) {
