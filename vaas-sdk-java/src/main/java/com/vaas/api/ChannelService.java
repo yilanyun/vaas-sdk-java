@@ -32,10 +32,11 @@ public class ChannelService {
      *
      * @return List 频道对象集合
      */
-    public List<Channel> getChannel() {
+    public List<Channel> getChannel(int videoType) {
         List<Channel> data = new ArrayList<>();
         String serverUrl = ConfigMap.getValue("HOST") + SERV_CHANNEL;
         JSONObject params = this.params;
+        params.put("video_type", videoType);
         String postData = GenerateSign.getPostBodyData(params);
         String ret = OkHttpClient.httpPost(serverUrl, postData);
         ResponseEntity res = GSON.fromJson(ret, ResponseEntity.class);
