@@ -22,8 +22,10 @@ public class VideoService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String SERV_VIDEO_DETAILS = "/video/getvideos";
-    private static final String SERV_PLAY = "/vaas/video/play";
+    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String HOST_PLAY = ConfigMap.getValue("HOST_PLAY");
+    private static final String SEV_VIDEO_DETAILS = "/video/getvideos";
+    private static final String SEV_PLAY = "/vaas/video/play";
 
     public VideoService(JSONObject params) {
         this.params = params;
@@ -38,7 +40,7 @@ public class VideoService {
      */
     public List<Video> details(String videoIds, int videoType) {
         List<Video> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_VIDEO_DETAILS;
+        String serverUrl = HOST + SEV_VIDEO_DETAILS;
         JSONObject params = this.params;
         params.put("ids", videoIds);
         params.put("video_type", videoType);
@@ -62,7 +64,7 @@ public class VideoService {
      */
     public List<Play> play(String videoId) {
         List<Play> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST_PLAY") + SERV_PLAY;
+        String serverUrl = HOST_PLAY + SEV_PLAY;
         JSONObject params = this.params;
         params.put("id", videoId);
         String postData = GenerateSign.getPostBodyData(params);

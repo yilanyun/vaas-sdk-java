@@ -19,7 +19,7 @@ public class ReportService {
     private static final Gson GSON = new Gson();
     private static final String AK = ConfigMap.getValue("ACCESS_KEY");
     private static final String HOST = ConfigMap.getValue("HOST_DATA");
-    private static final String SERV_DATA = "/log?ts=%s&access_key=%s&udid=%s&m=%s";
+    private static final String SEV_DATA = "/log?ts=%s&access_key=%s&udid=%s&m=%s";
 
     public ReportService(JSONObject params) {
         this.params = params;
@@ -37,7 +37,7 @@ public class ReportService {
         String ts = Long.toString(System.currentTimeMillis());
         String udid = this.params.getString("udid");
         String sign = GenerateSign.genReportSign(udid, ts);
-        String serverUrl = HOST + String.format(SERV_DATA, ts, AK, udid, sign);
+        String serverUrl = HOST + String.format(SEV_DATA, ts, AK, udid, sign);
         JSONObject body = new JSONObject();
         body.put("videoid", videoId);
         body.put("logid", logId);
@@ -67,7 +67,7 @@ public class ReportService {
         String ts = Long.toString(System.currentTimeMillis());
         String udid = this.params.getString("udid");
         String sign = GenerateSign.genReportSign(udid, ts);
-        String serverUrl = HOST + String.format(SERV_DATA, ts, AK, udid, sign);
+        String serverUrl = HOST + String.format(SEV_DATA, ts, AK, udid, sign);
         JSONObject body = new JSONObject();
         body.put("videoid", videoId);
         body.put("logid", logId);
@@ -98,7 +98,7 @@ public class ReportService {
         String ts = Long.toString(System.currentTimeMillis());
         String udid = this.params.getString("udid");
         String sign = GenerateSign.genReportSign(udid, ts);
-        String serverUrl = HOST + String.format(SERV_DATA, ts, AK, udid, sign);
+        String serverUrl = HOST + String.format(SEV_DATA, ts, AK, udid, sign);
         JSONObject body = new JSONObject();
         body.put("videoid", videoId);
         body.put("taskid", taskId);
@@ -128,7 +128,7 @@ public class ReportService {
         String ts = Long.toString(System.currentTimeMillis());
         String udid = this.params.getString("udid");
         String sign = GenerateSign.genReportSign(udid, ts);
-        String serverUrl = HOST + String.format(SERV_DATA, ts, AK, udid, sign);
+        String serverUrl = HOST + String.format(SEV_DATA, ts, AK, udid, sign);
         JSONObject body = new JSONObject();
         body.put("videoid", videoId);
         body.put("cpid", cpId);

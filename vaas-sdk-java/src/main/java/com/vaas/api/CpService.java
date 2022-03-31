@@ -22,8 +22,9 @@ public class CpService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String SERV_CP_INFO = "/video/cpinfo";
-    private static final String SERV_CP_VIDEOS = "/video/cpvideos";
+    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String SEV_CP_INFO = "/video/cpinfo";
+    private static final String SEV_CP_VIDEOS = "/video/cpvideos";
 
     public CpService(JSONObject params) {
         this.params = params;
@@ -38,7 +39,7 @@ public class CpService {
      */
     public Cp cpInfo(String id, int videoType) {
         Cp info = new Cp();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_CP_INFO;
+        String serverUrl = HOST + SEV_CP_INFO;
         JSONObject params = this.params;
         params.put("id", id);
         params.put("video_type", videoType);
@@ -64,7 +65,7 @@ public class CpService {
      */
     public List<Video> cpVideoList(String id, int videoType, int page, int size) {
         List<Video> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_CP_VIDEOS;
+        String serverUrl = HOST + SEV_CP_VIDEOS;
         JSONObject params = this.params;
         params.put("id", id);
         params.put("video_type", videoType);

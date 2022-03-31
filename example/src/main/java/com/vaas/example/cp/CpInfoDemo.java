@@ -6,7 +6,7 @@ import com.vaas.api.VaaSClient;
 public class CpInfoDemo {
 
     public static void main(String[] args) {
-        VaaSClient client = new VaaSClient(5, "tv.yilan.qianpai.app");
+        VaaSClient client = new VaaSClient();
         // call below method if you dont set access_key and access_token in vaas-sdk-java/src/main/resources/application.properties
 //        client.setAccessKey("your access_key");
 //        client.setAccessToken("your access_token");

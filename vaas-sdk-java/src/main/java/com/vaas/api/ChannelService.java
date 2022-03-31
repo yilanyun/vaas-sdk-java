@@ -21,7 +21,8 @@ public class ChannelService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String SERV_CHANNEL = "/video/channels";
+    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String SEV_CHANNEL = "/video/channels";
 
     public ChannelService(JSONObject params) {
         this.params = params;
@@ -30,11 +31,12 @@ public class ChannelService {
     /**
      * 获取渠道的频道列表
      *
+     * @param videoType 视频类型，1-横屏，2-竖屏
      * @return List 频道对象集合
      */
     public List<Channel> getChannel(int videoType) {
         List<Channel> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_CHANNEL;
+        String serverUrl = HOST + SEV_CHANNEL;
         JSONObject params = this.params;
         params.put("video_type", videoType);
         String postData = GenerateSign.getPostBodyData(params);

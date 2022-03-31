@@ -23,8 +23,9 @@ public class RecommendService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String SERV_FEED = "/video/feed";
-    private static final String SERV_RELATION = "/video/relation";
+    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String SEV_FEED = "/video/feed";
+    private static final String SEV_RELATION = "/video/relation";
 
     public RecommendService(JSONObject params) {
         this.params = params;
@@ -41,7 +42,7 @@ public class RecommendService {
      */
     public List<Video> feed(int videoType, int channelId, int loadType, int size) {
         List<Video> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_FEED;
+        String serverUrl = HOST + SEV_FEED;
         JSONObject params = this.params;
         params.put("video_type", videoType);
         params.put("channel_id", channelId);
@@ -68,7 +69,7 @@ public class RecommendService {
      */
     public List<Video> relation(String id, int size) {
         List<Video> data = new ArrayList<>();
-        String serverUrl = ConfigMap.getValue("HOST") + SERV_RELATION;
+        String serverUrl = HOST + SEV_RELATION;
         JSONObject params = this.params;
         params.put("id", id);
         params.put("size", size);
