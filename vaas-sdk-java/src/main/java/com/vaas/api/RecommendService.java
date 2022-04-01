@@ -23,7 +23,7 @@ public class RecommendService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String HOST = ConfigMap.getValue("HOST_VIDEO");
     private static final String SEV_FEED = "/video/feed";
     private static final String SEV_RELATION = "/video/relation";
 

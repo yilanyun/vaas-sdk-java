@@ -29,7 +29,7 @@
         <version>最新版本</version>
     </dependency>
     ...
-<dependencies>
+</dependencies>
 ```
 最新的版本请在  查看
 
@@ -52,13 +52,9 @@
 
 ### access_key / access_token 注册申请流程
 
-1.使用帐号/密码 [登录](https://console.vaas.cn/login) 控制台；
+1.使用帐号/密码登录 [控制台](https://console.vaas.cn/login) 创建所属应用；
 
-2.选择一级菜单“应用管理”->选择二级菜单“应用列表”,点击“新建应用”按钮创建应用；
-
-3.创建过程中，请正确填写应用包名。 对于SDK，建议在“详情页地址”处填写正确的应用下载地址，以便之后进行广告配置以及运营工作。若应用暂未上架，此处可以先填写公司网址。待应用上架后请及时更新；
-
-4.创建完成后，等待应用审核。一览将在3个工作日内审核完成。应用创建后分配 access key 和 access token。
+2.创建完成后，等待应用审核。一览将在3个工作日内审核完成。应用创建后分配 access key 和 access token。
 
 ### access_key / access_token 在 sdk 中的使用
 
@@ -70,6 +66,7 @@
 
 - (option 2) 在代码里显示调用方法 setAccessKey / setAccessToken，例：
 ```
+  VaaSClient client = new VaaSClient();
   client.setAccessKey("your access_key");
   client.setAccessToken("your access_token");
 ```
@@ -78,7 +75,24 @@
 
 > 以下片断来自项目代码里的文件：com.vaas.example.channel.GetChannelDemo
 
-### 公共参数配置说明
+### 服务域名设置说明
+
+- (option 1) 放在配置文件 example/src/main/resources/application.properties，格式为：
+```
+  HOST_VIDEO = https://api.yilanvaas.cn
+  HOST_PLAY = https://play.yilanvaas.cn
+  HOST_DATA = http://data.1lan.tv
+```
+
+- (option 2) 在代码里显式调用方法 setVideoHost / setPlayHost / setDataHost，例：
+```
+  VaaSClient client = new VaaSClient();
+  client.setVideoHost("your video_host");
+  client.setPlayHost("your play_host");
+  client.setDataHost("your data_host");
+```
+
+### 公共参数设置说明
 
 - (option 1) 放在配置文件 example/src/main/resources/application.properties，格式为：
 ```
@@ -88,11 +102,12 @@
 
 - (option 2) 在代码里显式调用方法 setPackageName / setPlatform，例：
 ```
+  VaaSClient client = new VaaSClient();
   client.setPackageName("your pkg_name");
   client.setPlatform("your platform");
 ```
 
-udid 参数仅支持显式调用设置
+注：udid 参数仅支持显式调用设置
 ```
   client.setUdid("your udid");
 ```
@@ -100,4 +115,3 @@ udid 参数仅支持显式调用设置
 ## Examples
 
 测试样例 com.vaas.example.channel.GetChannelDemo
-

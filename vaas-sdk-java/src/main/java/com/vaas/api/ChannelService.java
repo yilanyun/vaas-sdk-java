@@ -21,7 +21,7 @@ public class ChannelService {
     private final JSONObject params;
     private static final Logger LOG = LoggerFactory.getLogger(ChannelService.class);
     private static final Gson GSON = new Gson();
-    private static final String HOST = ConfigMap.getValue("HOST");
+    private static final String HOST = ConfigMap.getValue("HOST_VIDEO");
     private static final String SEV_CHANNEL = "/video/channels";
 
     public ChannelService(JSONObject params) {

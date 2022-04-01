@@ -61,4 +61,16 @@ public class VaaSClient {
     public void setAccessToken(String accessToken) {
         ConfigMap.setValue("ACCESS_TOKEN", accessToken);
     }
+
+    public void setVideoHost(String host) {
+        ConfigMap.setValue("HOST_VIDEO", host);
+    }
+
+    public void setPlayHost(String host) {
+        ConfigMap.setValue("HOST_PLAY", host);
+    }
+
+    public void setDataHost(String host) {
+        ConfigMap.setValue("HOST_DATA", host);
+    }
 }
