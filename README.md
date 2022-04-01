@@ -33,19 +33,10 @@
 ```
 最新的版本请在  查看
 
-### 源码方式
-
-对于鉴权签名有所了解的用户或者有对 sdk 内部的逻辑有改造需求的用户可以对该源码进行修改
+有对 sdk 内部的逻辑有改造需求的用户可以参考源码进行修改
 
 * 采用 `git clone https://github.com/yilanyun/vaas-sdk-java.git` 命令下载源码
 * 如果不使用git，请到 [github](https://github.com/yilanyun/vaas-sdk-java.git) 下载源码包并解压
-* 采用 IDE 导入下载的源码工程，推荐采用 maven 的方式，方便依赖包的管理
-* 开发者需要注意，将本项目的编码格式设置为 UTF-8
-* 可以用 IDE 导出 jar 包。建议直接使用 maven，执行命令：
-
-
-    mvn clean package
-    
 
 
 ## 关于 access_key / access_token
@@ -114,4 +105,12 @@
 
 ## Examples
 
-测试样例 com.vaas.example.channel.GetChannelDemo
+```
+  VaaSClient client = new VaaSClient();
+  client.setUdid("df757f33b10f142596106bb451fa2187");
+  List<Channel> data = client.channel().getChannel(1);
+  System.out.println("channel data: ");
+  for (Channel ch : data) {
+      System.out.println(ch.toString());
+  }
+```
